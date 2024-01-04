@@ -1,0 +1,43 @@
+[
+  {
+    "nomeDeUsuario": "NatR",
+    "nome": "Natalia Rosa",
+    "email": "natalia@gmail.com",
+    "senha": "abc123",
+    "cargo": "Desenvolvedor"
+  },
+  {
+    "nomeDeUsuario": "BarC",
+    "nome": "Barbara Cristina",
+    "email": "barbara@gmail.com",
+    "senha": "abc123",
+    "cargo": "Desenvolvedor"
+  },
+  {
+    "nomeDeUsuario": "DanS",
+    "nome": "Daniel Silva",
+    "email": "daniel@gmail.com",
+    "senha": "abc123",
+    "cargo": "Desenvolvedor"
+  },
+  {
+    "nomeDeUsuario": "TamU",
+    "nome": "Tamara Urso",
+    "email": "tamara@gmail.com",
+    "senha": "abc123",
+    "cargo": "TechLeader"
+  },
+  {
+    "nomeDeUsuario": "FabV",
+    "nome": "Fabio Vasques",
+    "email": "fabio@gmail.com",
+    "senha": "abc123",
+    "cargo": "TechLeader"
+  }
+
+
+
+
+
+
+]
