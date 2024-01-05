@@ -32,7 +32,7 @@ namespace GerenciadorDeTarefas.Usuarios
 
         public static Desenvolvedor PedirLoginDev()
         {
-            Console.WriteLine($"\nInsira nome de usuário do desenvolvedor:");
+            Console.WriteLine($"\nNome de usuário do desenvolvedor:");
             string? loginDev = Console.ReadLine();
             while (string.IsNullOrEmpty(loginDev))
             {
@@ -50,7 +50,35 @@ namespace GerenciadorDeTarefas.Usuarios
             return desenvolvedor;
         }
 
-        //"submeter criação" de tarefas (automaticamente responsavel e quem decide o tempo é o techleader)
-        //ver suas tarefas ou relacionadas com a sua
+        public void CriarTarefa()
+        {
+            Console.WriteLine("\nCRIAR NOVA TAREFA:");
+
+            Console.WriteLine("Nome:");
+            string? nome = Console.ReadLine();
+            while (string.IsNullOrEmpty(nome))
+            {
+                Console.WriteLine("O campo nome não pode ser vázio, digite novamente:");
+                nome = Console.ReadLine();
+            }
+
+            Console.WriteLine("Descrição:");
+            string? descricao = Console.ReadLine();
+            if (string.IsNullOrEmpty(descricao))
+            {
+                descricao = " - ";
+            }
+
+            Desenvolvedor responsavel = this;
+
+            Tarefa tarefaNova = new Tarefa(nome, descricao, responsavel);
+            RelacaoTarefas.AdicionarTarefa(tarefaNova);
+        }
+
+        public void ImprimirTarefas()
+        {
+            RelacaoTarefas.ImprimirTarefasDev(this);
+        }
+
     }
 }

@@ -19,7 +19,6 @@ namespace GerenciadorDeTarefas.Usuarios
         public LerUsuarioCSV()
         {
             arquivoJson = arquivoJson.Replace("InterfaceUsuario\\bin\\Debug\\net8.0", "GerenciadorDeTarefas");
-            //listaUsuarios = InicializarUsuarios();
             listaDesenvolvedores = InicializarUsuarios2().Item1;
             listaTechLeaders = InicializarUsuarios2().Item2;
         }

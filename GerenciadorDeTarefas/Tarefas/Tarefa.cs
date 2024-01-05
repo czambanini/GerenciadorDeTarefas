@@ -1,5 +1,4 @@
-﻿using GerenciadorDeTarefas.Estatisticas;
-using GerenciadorDeTarefas.Usuarios;
+﻿using GerenciadorDeTarefas.Usuarios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -86,6 +85,19 @@ namespace GerenciadorDeTarefas.Tarefas
             }
         }
 
+        public void CancelarTarefa()
+        {
+            if (this.StatusTarefa == StatusTarefa.Cancelada)
+            {
+                Console.WriteLine($"Essa tarefa já foi cancelada.");
+            }
+            else
+            {
+                StatusTarefa = StatusTarefa.Cancelada;
+                Console.WriteLine($"Tarefa {this.id} mudada para cancelada.");
+            }
+        }
+
         public void MudarDataLimite(DateTime novoPrazo)
         {
             DataLimite = novoPrazo;
@@ -115,7 +127,7 @@ namespace GerenciadorDeTarefas.Tarefas
 
         public void ConferirAtraso()
         {
-            if (this.DataLimite < DateTime.Now && (this.StatusTarefa != StatusTarefa.Concluida || this.StatusTarefa != StatusTarefa.Cancelada))
+            if (this.DataLimite < DateTime.Now && (this.StatusTarefa != StatusTarefa.Concluida && this.StatusTarefa != StatusTarefa.Cancelada))
             {
                 this.StatusTarefa = StatusTarefa.Atrasada;
             }
@@ -128,7 +140,6 @@ namespace GerenciadorDeTarefas.Tarefas
                 Tarefa tarefaPrereq = this.Prerequisito;
                 if (tarefaPrereq.StatusTarefa != StatusTarefa.Concluida)
                 {
-                    Console.WriteLine($"Tarefa pré-requisito não finalizada: {this.Prerequisito}");
                     this.StatusTarefa = StatusTarefa.Impedida;
                 }
             }

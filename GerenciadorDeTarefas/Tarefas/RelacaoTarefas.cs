@@ -32,6 +32,34 @@ namespace GerenciadorDeTarefas.Tarefas
         {
             foreach (Tarefa tarefa in relacaoTarefas)
             {
+                if (tarefa.StatusTarefa != StatusTarefa.Cancelada) 
+                {
+                    tarefa.ExibirInformacoes();
+                    Console.WriteLine();
+                }
+                
+            }
+        }
+
+        public static void ImprimirTarefasDev(Desenvolvedor desenvolvedor)
+        {
+            List<Tarefa> relacionadas = new List<Tarefa>();
+            List<Tarefa> relacionadadistinct = new List<Tarefa>();
+            Console.WriteLine("\nSUAS TAREFAS:");
+            foreach (Tarefa tarefa in relacaoTarefas.Where(tarefa => tarefa.Responsavel == (Usuario)desenvolvedor ))
+            {
+                tarefa.ExibirInformacoes();
+                Console.WriteLine();
+
+                if (tarefa.Prerequisito != null)
+                {
+                    relacionadas.Add(tarefa.Prerequisito);
+                    relacionadadistinct = relacionadas.Distinct().ToList();
+                }
+            }
+            Console.WriteLine("\nTAREFAS RELACIONADAS:");
+            foreach (Tarefa tarefa in relacionadadistinct)
+            {
                 tarefa.ExibirInformacoes();
                 Console.WriteLine();
             }
@@ -56,16 +84,12 @@ namespace GerenciadorDeTarefas.Tarefas
 
             return tarefa;
         }
+
         public static Tarefa AcharTarefaPeloId(int id)
         {
             foreach (Tarefa tarefa in relacaoTarefas)
             {
-                if (tarefa.id == id)
-                {
-                    //int index = relacaoTarefas.IndexOf(tarefa);
-                    //return relacaoTarefas[index];
-                    return tarefa;
-                }
+                if (tarefa.id == id) return tarefa;
             }
             return null;
         }

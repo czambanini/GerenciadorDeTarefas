@@ -1,5 +1,6 @@
 ﻿using GerenciadorDeTarefas.Tarefas;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,13 +34,25 @@ namespace GerenciadorDeTarefas.Usuarios
         public void CriarTarefa()
         {
             Console.WriteLine("\nCRIAR NOVA TAREFA:");
+
             Console.WriteLine("Nome:");
-            string nome = Console.ReadLine();
+            string? nome = Console.ReadLine();
+            while (string.IsNullOrEmpty(nome))
+            {
+                Console.WriteLine("O campo nome não pode ser vázio, digite novamente:");
+                nome = Console.ReadLine();
+            }
+
             Console.WriteLine("Descrição:");
-            string descricao = Console.ReadLine();
-            Console.WriteLine("Desenvolvedor responsável (nome de usuário):");
-            string nomeresponsavel = Console.ReadLine();
-            Desenvolvedor responsavel = Desenvolvedor.BuscarPorLogin(nomeresponsavel);
+            string? descricao = Console.ReadLine();
+            if (string.IsNullOrEmpty(descricao))
+            {
+                descricao = " - ";
+            }
+
+            Console.WriteLine("Responsavel:");
+            Desenvolvedor responsavel = Desenvolvedor.PedirLoginDev();
+
             DateTime datalimite = Tarefa.PedirDataLimite();
 
             Tarefa tarefaNova = new Tarefa(nome, descricao, responsavel, datalimite);
@@ -76,10 +89,37 @@ namespace GerenciadorDeTarefas.Usuarios
             tarefaEscolhida.ConcluirTarefa();
         }
 
+        public void CancelarTarefa(Tarefa tarefaEscolhida)
+        {
+            tarefaEscolhida.CancelarTarefa();
+        }
+        public void ExibirDadosGerais()
+        {
+            EstatisticasTarefas estatisticas = new EstatisticasTarefas();
+            estatisticas.MostrarDadosGerais();
+        }
 
-        //ver tarefa de todos, criar tarefas, assumir tarefas, acessar estatisticas (atrasos, concluidas, abandonadas, impedimento, em analise)
-        //autorizar o inicio de tarefas em analise, colocar um responsavel ou mudar responsavel da tarefa.
-        //adiciona tempo e correlação as tarefas. Aprovar tarefas feitas.
-        //adicionar desenvolvedores ao txt/json
+        public void ExibirTarefasFiltradas(StatusTarefa status)
+        {
+            EstatisticasTarefas estatisticas = new EstatisticasTarefas();
+            List<Tarefa> listafiltrada = new List<Tarefa>();
+
+            if (status == StatusTarefa.AguardadoAprovacaoInicial) listafiltrada.AddRange(estatisticas.TarefasAguardandoAprovacaoInicial());
+            else if (status == StatusTarefa.EmAndamento) listafiltrada.AddRange(estatisticas.TarefasEmAndamento());
+            else if (status == StatusTarefa.Atrasada) listafiltrada.AddRange(estatisticas.TarefasAtrasadas());
+            else if (status == StatusTarefa.Impedida) listafiltrada.AddRange(estatisticas.TarefasImpedidas());
+            else if (status == StatusTarefa.EmAnalise) listafiltrada.AddRange(estatisticas.TarefasEmAnalise());
+            else if (status == StatusTarefa.Concluida) listafiltrada.AddRange(estatisticas.TarefasConcluidas());
+            else if (status == StatusTarefa.Cancelada) listafiltrada.AddRange(estatisticas.TarefasCanceladas());
+
+            foreach (Tarefa tarefa in listafiltrada)
+            {
+                tarefa.ExibirInformacoes();
+            }
+        }
     }
-}
+
+
+        //acessar estatisticas (atrasos, concluidas, abandonadas, impedimento, em analise)
+        //adicionar desenvolvedores ao txt/json
+ }
