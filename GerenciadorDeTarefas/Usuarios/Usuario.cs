@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GerenciadorDeTarefas.Usuarios
 {
-    internal class Usuario
+    public class Usuario
     {
         public string NomeDeUsuario { get; set; }
         public string Nome {  get; set; }
@@ -32,7 +32,7 @@ namespace GerenciadorDeTarefas.Usuarios
 
         public static Usuario FazerLogin() {
             
-            LerUsuarioCSV lerusuarios = new LerUsuarioCSV();
+            LerUsuario lerusuarios = new LerUsuario();
             List<Desenvolvedor> listaDevs = lerusuarios.RetornarListaDevs();
             List<TechLeader> listaLeaders = lerusuarios.RetornarListaLeaders();
 

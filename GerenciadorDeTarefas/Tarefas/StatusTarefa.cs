@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GerenciadorDeTarefas.Tarefas
 {
-    enum StatusTarefa
+    public enum StatusTarefa
     {
         AguardadoAprovacaoInicial = 1,
         EmAndamento = 2,

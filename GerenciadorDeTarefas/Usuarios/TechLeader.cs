@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GerenciadorDeTarefas.Usuarios
 {
-    internal class TechLeader : Usuario
+    public class TechLeader : Usuario
     {
         public TechLeader(string nomeDeUsuario, string nome, string senha, Cargo cargo) : base(nomeDeUsuario, nome, senha, cargo)
         {
@@ -17,7 +17,7 @@ namespace GerenciadorDeTarefas.Usuarios
 
         public static TechLeader BuscarPorLogin(string nomeDeUsuario)
         {
-            LerUsuarioCSV lerusuarios = new LerUsuarioCSV();
+            LerUsuario lerusuarios = new LerUsuario();
             List<TechLeader> listaTech = lerusuarios.RetornarListaLeaders();
 
             foreach (TechLeader techLeader in listaTech)
@@ -93,6 +93,7 @@ namespace GerenciadorDeTarefas.Usuarios
         {
             tarefaEscolhida.CancelarTarefa();
         }
+
         public void ExibirDadosGerais()
         {
             EstatisticasTarefas estatisticas = new EstatisticasTarefas();
@@ -117,9 +118,28 @@ namespace GerenciadorDeTarefas.Usuarios
                 tarefa.ExibirInformacoes();
             }
         }
+
+        public void ConsultarStatusDesenvolvedores()
+        {
+            LerUsuario lerUsuarioCSV = new LerUsuario();
+            List<Desenvolvedor> listaDesenvolvedores = lerUsuarioCSV.RetornarListaDevs();
+            EstatisticasTarefas estatisticas = new EstatisticasTarefas();
+
+            foreach (Desenvolvedor desenvolvedor in listaDesenvolvedores)
+            {
+                desenvolvedor.ExibirInformacoes();
+                estatisticas.EstatisticaDoUsuario(desenvolvedor);
+            }
+        }
+
+        public void CriarNovoDesenvolvedor()
+        {
+            GestorDeUsuarios gestorDeUsuarios = new GestorDeUsuarios();
+            gestorDeUsuarios.CadastrarNovoDev();
+        }
     }
 
 
-        //acessar estatisticas (atrasos, concluidas, abandonadas, impedimento, em analise)
+
         //adicionar desenvolvedores ao txt/json
  }

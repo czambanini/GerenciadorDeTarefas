@@ -36,8 +36,8 @@ namespace GerenciadorDeTarefas.Interface
                     MenuDesenvolvedor(desenvolvedorLogado);
                     return;
                 case 3:
-                    //Tarefa tarefaEscolhida = RelacaoTarefas.PedirIdTarefa();
-                    //MenuTarefa(desenvolvedorLogado, tarefaEscolhida);
+                    Tarefa tarefaEscolhida = RelacaoTarefas.PedirIdTarefa();
+                    desenvolvedorLogado.SubmeterParaConclusao(tarefaEscolhida);
                     MenuDesenvolvedor(desenvolvedorLogado);
                     return;
                 default:

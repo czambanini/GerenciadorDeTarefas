@@ -16,7 +16,8 @@ namespace GerenciadorDeTarefas.Interface
             Console.WriteLine($"SISTEMA DE TAREFA LOGADO COM SUCESSO \nUsuário: {techLeaderLogado.Cargo} {techLeaderLogado.Nome}.");
 
             Console.WriteLine($"\nSELECIONE OPÇÃO DESEJADA:");
-            Console.WriteLine($"1. Exibir Todas as Tarefas Ativas \n2. Filtros e Estatísticas \n3. Criar nova tarefa \n4. Selecionar Tarefa");
+            Console.WriteLine($"1. Exibir Todas as Tarefas Ativas \n2. Filtros e Estatísticas \n3. Criar nova tarefa \n4. Selecionar Tarefa" +
+                $"\n5. Exibir Status dos Desenvolvedores \n6. Cadastrar Novo Desenvolvedor");
             int opcao;
             while (!int.TryParse(Console.ReadLine(), out opcao))
             {
@@ -44,6 +45,18 @@ namespace GerenciadorDeTarefas.Interface
                 case 4:
                     Tarefa tarefaEscolhida = RelacaoTarefas.PedirIdTarefa();
                     MenuTarefa(techLeaderLogado, tarefaEscolhida);
+                    MenuTechLeader(techLeaderLogado);
+                    return;
+                case 5:
+                    techLeaderLogado.ConsultarStatusDesenvolvedores();
+                    Console.WriteLine($"\nPrecione [ENTER] para voltar");
+                    Console.ReadLine();
+                    MenuTechLeader(techLeaderLogado);
+                    return;
+                case 6:
+                    techLeaderLogado.CriarNovoDesenvolvedor();
+                    Console.WriteLine($"\nPrecione [ENTER] para voltar");
+                    Console.ReadLine();
                     MenuTechLeader(techLeaderLogado);
                     return;
                 default:

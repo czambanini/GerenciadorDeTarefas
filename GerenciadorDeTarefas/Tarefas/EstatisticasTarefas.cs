@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GerenciadorDeTarefas.Usuarios;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -74,12 +75,16 @@ namespace GerenciadorDeTarefas.Tarefas
             Console.WriteLine($"Tarefas Concluídas: {TarefasConcluidas().Count}");
             Console.WriteLine($"Tarefas Canceladas: {TarefasCanceladas().Count}");
         }
-        internal void ImprimirLista(List<Tarefa> lista)
+        internal void EstatisticaDoUsuario(Desenvolvedor desenvolvedor)
         {
-            foreach(Tarefa tarefa in lista)
-            {
-                tarefa.ExibirInformacoes();
-            }
+            Console.WriteLine($"Tarefas atrasadas: {TarefasAtrasadas().Where(tarefa => tarefa.Responsavel.NomeDeUsuario == desenvolvedor.NomeDeUsuario).ToList().Count}");
+            Console.WriteLine($"Tarefas em andamento: {TarefasEmAndamento().Where(tarefa => tarefa.Responsavel.NomeDeUsuario == desenvolvedor.NomeDeUsuario).ToList().Count}");
+            Console.WriteLine($"Tarefas aguardando aprovação inicial: {TarefasAguardandoAprovacaoInicial().Where(tarefa => tarefa.Responsavel.NomeDeUsuario == desenvolvedor.NomeDeUsuario).ToList().Count}");
+            Console.WriteLine($"Tarefas impedidas: {TarefasImpedidas().Where(tarefa => tarefa.Responsavel.NomeDeUsuario == desenvolvedor.NomeDeUsuario).ToList().Count}");
+            Console.WriteLine($"Tarefas aguardando aprovação de conclusão:: {TarefasEmAnalise().Where(tarefa => tarefa.Responsavel.NomeDeUsuario == desenvolvedor.NomeDeUsuario).ToList().Count}");
+            Console.WriteLine(" "); 
+            Console.WriteLine("--------------------------"); 
+            Console.WriteLine(" ");
         }
 
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GerenciadorDeTarefas.Tarefas
 {
-    internal class Tarefa
+    public class Tarefa
     {
         public readonly int id;
         public string Nome { get; set; }
@@ -147,11 +147,7 @@ namespace GerenciadorDeTarefas.Tarefas
 
         public void SubmeterParaConclusao ()
         {
-                if (StatusTarefa == StatusTarefa.EmAnalise)
-                {
-                    StatusTarefa = StatusTarefa.Concluida;
-                }
-
+            StatusTarefa = StatusTarefa.EmAnalise;
         }
 
         public static DateTime PedirDataLimite()

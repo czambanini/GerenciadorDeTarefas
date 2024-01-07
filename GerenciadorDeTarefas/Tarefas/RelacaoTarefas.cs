@@ -9,7 +9,7 @@ using System.Xml;
 
 namespace GerenciadorDeTarefas.Tarefas
 {
-    internal static class RelacaoTarefas
+    public static class RelacaoTarefas
     {
         public static List<Tarefa> relacaoTarefas = new List<Tarefa>();
 
@@ -45,16 +45,20 @@ namespace GerenciadorDeTarefas.Tarefas
         {
             List<Tarefa> relacionadas = new List<Tarefa>();
             List<Tarefa> relacionadadistinct = new List<Tarefa>();
-            Console.WriteLine("\nSUAS TAREFAS:");
-            foreach (Tarefa tarefa in relacaoTarefas.Where(tarefa => tarefa.Responsavel == (Usuario)desenvolvedor ))
-            {
-                tarefa.ExibirInformacoes();
-                Console.WriteLine();
 
-                if (tarefa.Prerequisito != null)
+            Console.WriteLine("\nSUAS TAREFAS:");
+            foreach (Tarefa tarefa in relacaoTarefas)
+            {
+                if (tarefa.Responsavel.NomeDeUsuario == desenvolvedor.NomeDeUsuario)
                 {
-                    relacionadas.Add(tarefa.Prerequisito);
-                    relacionadadistinct = relacionadas.Distinct().ToList();
+                    tarefa.ExibirInformacoes();
+                    Console.WriteLine();
+
+                    if (tarefa.Prerequisito != null)
+                    {
+                        relacionadas.Add(tarefa.Prerequisito);
+                        relacionadadistinct = relacionadas.Distinct().ToList();
+                    }
                 }
             }
             Console.WriteLine("\nTAREFAS RELACIONADAS:");

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GerenciadorDeTarefas.Usuarios
 {
-    internal class Desenvolvedor : Usuario
+    public class Desenvolvedor : Usuario
     {
         public Desenvolvedor(string nomeDeUsuario, string nome, string senha, Cargo cargo) : base (nomeDeUsuario, nome, senha, cargo)
         {
@@ -16,7 +16,7 @@ namespace GerenciadorDeTarefas.Usuarios
 
         public static Desenvolvedor BuscarPorLogin(string nomeDeUsuario)
         {
-            LerUsuarioCSV lerusuarios = new LerUsuarioCSV();
+            LerUsuario lerusuarios = new LerUsuario();
             List<Desenvolvedor> listaDevs = lerusuarios.RetornarListaDevs();
 
             foreach (Desenvolvedor desenvolvedor in listaDevs)
@@ -75,10 +75,16 @@ namespace GerenciadorDeTarefas.Usuarios
             RelacaoTarefas.AdicionarTarefa(tarefaNova);
         }
 
+        public void SubmeterParaConclusao(Tarefa tarefaescolhida)
+        {
+            tarefaescolhida.SubmeterParaConclusao();
+        }
+
         public void ImprimirTarefas()
         {
             RelacaoTarefas.ImprimirTarefasDev(this);
         }
+
 
     }
 }

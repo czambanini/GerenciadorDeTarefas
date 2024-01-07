@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GerenciadorDeTarefas.Usuarios
 {
-    enum Cargo
+    public enum Cargo
     {
         Desenvolvedor = 1,
         TechLeader = 2,
