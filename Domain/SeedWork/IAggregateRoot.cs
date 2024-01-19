@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GerenciadorDeTarefas.Usuarios
+namespace Domain.SeewWork
 {
-    public enum Cargo
+    internal interface IAggregateRoot
     {
-        Desenvolvedor = 1,
-        TechLeader = 2,
     }
 }
